@@ -1,11 +1,11 @@
 ﻿using Dalamud;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.ImGuiFileDialog;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -490,15 +490,27 @@ namespace HarpHero
                 ImGui.AlignTextToFramePadding();
                 ImGui.Text($"{locTrackSection}:");
                 ImGui.SameLine();
-                ImGui.PushItemWidth(100 * ImGuiHelpers.GlobalScale);
-                int[] sectionBars = { statBlock.startBar, statBlock.endBar };
-                if (ImGui.InputInt2("##section", ref sectionBars[0]))
-                {
-                    sectionBars[0] = Math.Max(0, sectionBars[0]);
-                    sectionBars[1] = Math.Min(Service.trackAssistant.musicTrack.statsOrg.numBarsTotal, sectionBars[1]);
+                ImGui.PushItemWidth(50 * ImGuiHelpers.GlobalScale);
 
+                bool needsSectionUpdate = false;
+                if (ImGui.InputInt("##section", ref statBlock.startBar))
+                {
+                    statBlock.startBar = Math.Max(0, statBlock.startBar);
+                    needsSectionUpdate = true;
+                }
+                ImGui.SameLine();
+                ImGui.Text("..");
+                ImGui.SameLine();
+                if (ImGui.InputInt("##sectionE", ref statBlock.endBar))
+                {
+                    statBlock.endBar = Math.Min(Service.trackAssistant.musicTrack.statsOrg.numBarsTotal, statBlock.endBar);
+                    needsSectionUpdate = true;
+                }
+
+                if (needsSectionUpdate)
+                {
                     // allow invalid values (0 length or start > end) here, most will be coming from in-between typing numbers
-                    Service.trackAssistant.SetTrackSection(sectionBars[0], sectionBars[1]);
+                    Service.trackAssistant.SetTrackSection(statBlock.startBar, statBlock.endBar);
                 }
                 ImGui.PopItemWidth();
 

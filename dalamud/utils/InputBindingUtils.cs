@@ -1,4 +1,5 @@
-﻿using Dalamud.Game.ClientState.GamePad;
+﻿using Dalamud.Bindings.ImGui;
+using Dalamud.Game.ClientState.GamePad;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Game.Config;
 using Dalamud.Game.Text;
@@ -6,7 +7,6 @@ using Dalamud.Interface;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using HarpHero;
-using ImGuiNET;
 using System;
 using System.Collections.Generic;
 using System.Numerics;

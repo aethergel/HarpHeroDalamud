@@ -123,7 +123,7 @@ namespace HarpHero
                 newIsPlaying = statePtr->IsPlaying != 0;
 
                 // vfunc 73, no named accessor? :<
-                var uiModule = (Service.gameGui != null) ? (UIModule*)Service.gameGui.GetUIModule() : null;
+                var uiModule = (Service.gameGui != null) ? (UIModule*)Service.gameGui.GetUIModule().Address : null;
                 nint dataSource = 0;
                 if (uiModule != null)
                 {

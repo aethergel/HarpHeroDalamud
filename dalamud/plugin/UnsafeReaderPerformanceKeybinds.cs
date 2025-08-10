@@ -155,7 +155,7 @@ namespace HarpHero
                 // - 0x22b (0x16 elems = gamepad notes)
                 // - 0x227 (0x4 elems = gamepad modifiers)
 
-                var uiModule = (Service.gameGui != null) ? (UIModule*)Service.gameGui.GetUIModule() : null;
+                var uiModule = (Service.gameGui != null) ? (UIModule*)Service.gameGui.GetUIModule().Address : null;
                 var uiInputData = (uiModule != null) ? uiModule->GetUIInputData() : null;
 
                 if (uiInputData != null)
